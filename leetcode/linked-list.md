@@ -1,8 +1,32 @@
 # Linked-list
 
++ [Linked list cycle](#linked-list-cycle)
 + [Reverse linked list](#reverse-linked-list)
 + [Middle of the linked list](#middle-of-the-linked-list)
 + [Remove nth node from end of list](#remove-nth-node-from-end-of-list)
+
+## Linked List Cycle
+
+https://leetcode.com/problems/linked-list-cycle/
+
+```python
+class Solution:
+    dct = {}
+    def find(self, Node):
+        if Node.next == None:
+            return False
+        else:
+            if not Node.next in self.dct:
+                self.dct[Node.next] = None
+                return self.find(Node.next)
+                
+            else:
+                return True
+    def hasCycle(self, head: ListNode) -> bool:
+        if not head:
+            return False
+        return self.find(head)
+```
 
 ## Reverse Linked List
 
@@ -28,8 +52,6 @@ class Solution:
             return None
         return self.deep(head,None)
 ```
-
-
 
 ## Middle of the Linked List
 
@@ -58,8 +80,6 @@ class Solution:
         self.find_middle(head)
         return self.inputa(head)
 ```
-
-
 
 ## Remove Nth Node From End of List
 
