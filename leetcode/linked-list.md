@@ -1,10 +1,10 @@
-#Linked-list
+# Linked-list
 
-+[Reverse linked list](#reverse-linked-list)
-+[Middle of the linked list](#middle-of-the-linked-list)
-+[Remove nth node from end of list](#remove-nth-node-from-end-of-list)
++ [Reverse linked list](#reverse-linked-list)
++ [Middle of the linked list](#middle-of-the-linked-list)
++ [Remove nth node from end of list](#remove-nth-node-from-end-of-list)
 
-##Reverse Linked List
+## Reverse Linked List
 
 https://leetcode.com/problems/reverse-linked-list/
 
@@ -31,7 +31,7 @@ class Solution:
 
 
 
-##Middle of the Linked List
+## Middle of the Linked List
 
 https://leetcode.com/problems/middle-of-the-linked-list/
 
@@ -61,7 +61,7 @@ class Solution:
 
 
 
-##Remove Nth Node From End of List
+## Remove Nth Node From End of List
 
 https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 
