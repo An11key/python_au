@@ -4,6 +4,7 @@
 + [Reverse linked list](#reverse-linked-list)
 + [Middle of the linked list](#middle-of-the-linked-list)
 + [Remove nth node from end of list](#remove-nth-node-from-end-of-list)
++ [Linked list cycle ii](#linked-list-cycle-ii)
 
 ## Linked List Cycle
 
@@ -109,3 +110,26 @@ class Solution:
         return head
 ```
 
+## Linked List Cycle II
+
+https://leetcode.com/problems/linked-list-cycle-ii/
+
+```python
+class Solution:
+    dct = {}
+    def find(self, Node):
+        if Node.next == None:
+            return None
+        else:
+            if not Node in self.dct:
+                self.dct[Node] = None
+                return self.find(Node.next)
+                
+            else:
+                return Node
+    
+    def detectCycle(self, head: ListNode) -> ListNode:
+        if not head:
+            return None
+        return self.find(head)
+```
