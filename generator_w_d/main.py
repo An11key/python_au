@@ -71,7 +71,7 @@ def bp():
     if os.stat(file).st_size == 0:
         f.close()
         f = open(file, 'w')
-        f.write(beat_name1(file))
+        f.write(beat_name1(file.split('\\')[-1]))
         f.write('\n\n')
         f.write(beat_name2(name))
         f.write('\n\n')
