@@ -3,6 +3,7 @@
 + [Valid anagram](#valid-anagram)
 + [Reverse string](#reverse-string)
 + [Reverse vowels of a string](#reverse-vowels-of-a-string)
++ [Reverse words in a string iii](#reverse-words-in-a-string-iii)
 
 ## Valid Anagram
 
@@ -46,4 +47,18 @@ class Solution:
                 continue 
             d.append(s[i])
         return ''.join(d)
+```
+
+## Reverse Words in a String III
+
+https://leetcode.com/problems/reverse-words-in-a-string-iii/
+
+```python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        c = s.split(' ')
+        for i in range (len(c)):
+            c[i]=c[i][::-1]
+        d = ' '.join(c)
+        return d
 ```
