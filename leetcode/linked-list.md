@@ -7,6 +7,7 @@
 + [Linked list cycle ii](#linked-list-cycle-ii)
 + [Merge two sorted lists](#merge-two-sorted-lists)
 + [Palindrome linked list](#palindrome-linked-list)
++ [Reorder list](#reorder-list)
 
 ## Linked List Cycle
 
@@ -200,4 +201,37 @@ class Solution:
             else:
                 return False
         return True
+```
+
+## Reorder List
+
+https://leetcode.com/problems/reorder-list/
+
+```python
+class Solution:
+    def reorderList(self, head: ListNode) -> None:
+        if not head or not head.next:
+            return head
+        arr = []
+        while head:
+            arr.append(head)
+            head = head.next
+        
+        n = len(arr)
+
+        if n%2 == 0:
+            mid = n//2 
+        else:
+            mid = n//2 + 1
+        
+        left = arr[:mid]
+        right = arr[mid:]
+        
+        arr[::2] = left
+        arr[1::2] = right[::-1]
+        
+        for i in range(n-1):
+            arr[i].next = arr[i+1]
+        arr[n-1].next = None
+        return arr[0]
 ```
