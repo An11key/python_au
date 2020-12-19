@@ -5,6 +5,7 @@
 + [Transpose matrix](#transpose-matrix)
 + [Move zeroes](#move-zeroes)
 + [Squares of a sorted array](#squares-of-a-sorted-array)
++ [Image smoother](#image-smoother)
 
 ## Reshape the Matrix
 
@@ -117,4 +118,26 @@ class Solution:
             nums[i] = nums[i]**2
         nums.sort()
         return nums
+```
+
+## Image Smoother
+
+https://leetcode.com/problems/image-smoother/
+
+```python
+class Solution:
+    def imageSmoother(self, M: List[List[int]]) -> List[List[int]]:
+        n = len(M)
+        m = len(M[0])
+        M2 = copy.deepcopy(M)
+        for i in range(n):
+            M[i].append(-1)
+        M.append([-1] * (m+1))
+        for i in range(n):
+            for j in range(m):
+                tmp = [M[i-1][j-1] , M[i][j-1] , M[i+1][j-1] , M[i-1][j] , M[i+1][j] , M[i-1][j+1] , M[i][j+1] , M[i+1][j+1]]
+                c = tmp.count(-1)
+                M2[i][j] += sum(tmp) + c
+                M2[i][j] = int(M2[i][j]/(9-c))
+        return M2
 ```
