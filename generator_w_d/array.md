@@ -4,6 +4,7 @@
 + [Flipping an image](#flipping-an-image)
 + [Transpose matrix](#transpose-matrix)
 + [Move zeroes](#move-zeroes)
++ [Squares of a sorted array](#squares-of-a-sorted-array)
 
 ## Reshape the Matrix
 
@@ -103,4 +104,17 @@ class Solution:
             i+=1
         for i in range(count):
             nums.append(0)
+```
+
+## Squares of a Sorted Array
+
+https://leetcode.com/problems/squares-of-a-sorted-array/
+
+```python
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        for i in range (len(nums)):
+            nums[i] = nums[i]**2
+        nums.sort()
+        return nums
 ```
