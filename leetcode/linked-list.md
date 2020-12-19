@@ -5,6 +5,10 @@
 + [Middle of the linked list](#middle-of-the-linked-list)
 + [Remove nth node from end of list](#remove-nth-node-from-end-of-list)
 + [Linked list cycle ii](#linked-list-cycle-ii)
++ [Merge two sorted lists](#merge-two-sorted-lists)
++ [Palindrome linked list](#palindrome-linked-list)
++ [Reorder list](#reorder-list)
++ [Intersection of two linked lists](#intersection-of-two-linked-lists)
 
 ## Linked List Cycle
 
@@ -132,4 +136,151 @@ class Solution:
         if not head:
             return None
         return self.find(head)
+```
+
+## Merge Two Sorted Lists
+
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+```python
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        l=[]
+        if not l1 and not l2:
+            return l1
+        while l1:
+            l.append(l1)
+            l1=l1.next
+        while l2:
+            l.append(l2)
+            l2=l2.next
+        l.sort(key=lambda i:i.val)
+        for i in range(1,len(l)):
+            l[i-1].next=l[i]
+        l[-1].next=None
+        return l[0] 
+```
+
+## Palindrome Linked List
+
+https://leetcode.com/problems/palindrome-linked-list/
+
+```python
+class Solution:
+    def deep(self, head) :
+        leng = 0
+        cur = head
+        while cur is not None:
+            leng+=1
+            cur = cur.next
+        leng//=2
+        cur = head
+        while True:
+            if leng == 0:
+                return cur
+            else:
+                cur = cur.next
+                leng-=1
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        prev,cur,next = None, head, None
+        while cur is not None :
+            next = cur.next 
+            cur.next = prev
+            prev = cur 
+            cur = next
+        return prev
+    def isPalindrome(self, head: ListNode) -> bool:
+        head1 = self.reverseList(self.deep(head)) 
+        head2 = head
+        while head1 is not None:
+            if head1.val==head2.val:
+                head2 = head2.next
+                head1 = head1.next
+                continue
+            else:
+                return False
+        return True
+```
+
+## Reorder List
+
+https://leetcode.com/problems/reorder-list/
+
+```python
+class Solution:
+    def reorderList(self, head: ListNode) -> None:
+        if not head or not head.next:
+            return head
+        arr = []
+        while head:
+            arr.append(head)
+            head = head.next
+        
+        n = len(arr)
+
+        if n%2 == 0:
+            mid = n//2 
+        else:
+            mid = n//2 + 1
+        
+        left = arr[:mid]
+        right = arr[mid:]
+        
+        arr[::2] = left
+        arr[1::2] = right[::-1]
+        
+        for i in range(n-1):
+            arr[i].next = arr[i+1]
+        arr[n-1].next = None
+        return arr[0]
+```
+
+## Intersection of Two Linked Lists
+
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+```python
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        if not headA or not headB:
+            return None
+        
+        def get_height(node):
+            if not node:
+                return 0
+            count = 0
+            while node:
+                count += 1
+                node = node.next
+            
+            return count
+        
+        
+        h_A = get_height(headA)
+        h_B = get_height(headB)
+            
+        currA = headA
+        currB = headB
+        
+        
+        if h_A > h_B:
+            for _ in range(h_A - h_B):
+                currA = currA.next
+        elif h_B > h_A:
+            for _ in range(h_B - h_A):
+                currB = currB.next
+        
+        
+        while currA and currB:
+            if currA == currB:
+                return currA
+            
+            if currA.next == currB.next:
+                return currA.next
+            
+            currA = currA.next
+            currB = currB.next
+        return None
 ```
