@@ -9,6 +9,7 @@
 + [Palindrome linked list](#palindrome-linked-list)
 + [Reorder list](#reorder-list)
 + [Intersection of two linked lists](#intersection-of-two-linked-lists)
++ [Sort list](#sort-list)
 
 ## Linked List Cycle
 
@@ -283,4 +284,29 @@ class Solution:
             currA = currA.next
             currB = currB.next
         return None
+```
+
+## Sort List
+
+https://leetcode.com/problems/sort-list/
+
+```python
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        if not head: 
+            return None
+        arr = []
+        
+        p = head
+        while p:
+            arr.append(p)
+            p = p.next
+            
+        arr.sort(key=lambda x: x.val)
+        
+        for i in range(1,len(arr)):
+            arr[i-1].next = arr[i]
+        arr[-1].next = None
+        
+        return arr[0]
 ```
