@@ -5,6 +5,7 @@
 + [Middle of the linked list](#middle-of-the-linked-list)
 + [Remove nth node from end of list](#remove-nth-node-from-end-of-list)
 + [Linked list cycle ii](#linked-list-cycle-ii)
++ [Merge two sorted lists](#merge-two-sorted-lists)
 
 ## Linked List Cycle
 
@@ -132,4 +133,27 @@ class Solution:
         if not head:
             return None
         return self.find(head)
+```
+
+## Merge Two Sorted Lists
+
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+```python
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        l=[]
+        if not l1 and not l2:
+            return l1
+        while l1:
+            l.append(l1)
+            l1=l1.next
+        while l2:
+            l.append(l2)
+            l2=l2.next
+        l.sort(key=lambda i:i.val)
+        for i in range(1,len(l)):
+            l[i-1].next=l[i]
+        l[-1].next=None
+        return l[0] 
 ```
