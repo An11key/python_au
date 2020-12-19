@@ -6,6 +6,7 @@
 + [Remove nth node from end of list](#remove-nth-node-from-end-of-list)
 + [Linked list cycle ii](#linked-list-cycle-ii)
 + [Merge two sorted lists](#merge-two-sorted-lists)
++ [Palindrome linked list](#palindrome-linked-list)
 
 ## Linked List Cycle
 
@@ -156,4 +157,47 @@ class Solution:
             l[i-1].next=l[i]
         l[-1].next=None
         return l[0] 
+```
+
+## Palindrome Linked List
+
+https://leetcode.com/problems/palindrome-linked-list/
+
+```python
+class Solution:
+    def deep(self, head) :
+        leng = 0
+        cur = head
+        while cur is not None:
+            leng+=1
+            cur = cur.next
+        leng//=2
+        cur = head
+        while True:
+            if leng == 0:
+                return cur
+            else:
+                cur = cur.next
+                leng-=1
+    def reverseList(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return head
+        prev,cur,next = None, head, None
+        while cur is not None :
+            next = cur.next 
+            cur.next = prev
+            prev = cur 
+            cur = next
+        return prev
+    def isPalindrome(self, head: ListNode) -> bool:
+        head1 = self.reverseList(self.deep(head)) 
+        head2 = head
+        while head1 is not None:
+            if head1.val==head2.val:
+                head2 = head2.next
+                head1 = head1.next
+                continue
+            else:
+                return False
+        return True
 ```
