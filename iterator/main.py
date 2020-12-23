@@ -13,6 +13,8 @@ class MyLinkedList:
         """
         self.length = 0
         self.head = None
+        self.cur = self.head
+        self.index = 0
 
     def get(self, index: int) -> int:
         """
@@ -84,7 +86,7 @@ class MyLinkedList:
         Delete the index-th node in the linked list, if the index is valid.
         """
         if index < self.length:
-            self.length -= 1;
+            self.length -= 1
             if index == 0:
                 self.head = self.head.next
             else:
@@ -96,19 +98,18 @@ class MyLinkedList:
                     cur = cur.next
                 prev.next = cur.next
 
+    def __iter__(self):
+        return self
 
-    def vyvod(self):
-        cur = self.head
-        while cur is not None:
-            print(cur.val)
-            cur = cur.next
+    def __next__(self):
+        if self.index < self.length:
+            self.index+=1
+            return self.get(self.index-1)
+        else:
+            raise StopIteration
 
 
-obj = MyLinkedList()
-obj.addAtIndex(0, 10)
-obj.addAtIndex(0, 20)
-obj.addAtIndex(0, 30)
-obj.vyvod()
+
 # Your MyLinkedList object will be instantiated and called as such:
 # obj = MyLinkedList()
 # param_1 = obj.get(index)
