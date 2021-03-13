@@ -1,6 +1,6 @@
 import requests
 
-TOKEN = 'c261e2978866dc40cbaa8f9cc6bb8e0798a994c5'
+TOKEN = 'net ego'
 
 
 def prepare_headers():
@@ -11,21 +11,25 @@ def prepare_headers():
     }
 
 
-def get_all_user_prs(user_login, repo_name, pr_state):
+def get_all_user_prs(user_login, repo_name, date):
     url = 'https://api.github.com/repos'
     prs_url = url + "/{}/{}/pulls".format(user_login, repo_name)
     r = requests.get(prs_url, headers=prepare_headers())
     pr_nums = []
     for item in r.json():
+
         pr_nums.append(prs_url + '/{}'.format(str(item['number'])))
     return pr_nums
 
 
-def get_all_pr_commits(pr):
+def get_all_pr_commits(pr,date):
     commit_url = pr + '/commits'
     commits = []
-    for item in requests.get(commit_url, headers=prepare_headers()).json():
-        commits.append(item['commit']['message'])
+    r = requests.get(commit_url, headers=prepare_headers())
+    for item in r.json():
+        # print(item['commit']['committer']['date'])
+        if item['commit']['committer']['date'] > date:
+            commits.append(item['commit']['message'])
     return commits
 
 
@@ -54,13 +58,14 @@ def send_pr_comment(pr, message_error):
     r = requests.post(pr, data=payload)
 
 
-def verify_pr(pr):
-    for item in get_all_pr_commits(pr):
+def verify_pr(pr,date):
+    for item in get_all_pr_commits(pr,date):
         send_pr_comment(pr, check_prefixes(item))
 
 
-if __name__ == '__main__':
-    prs = get_all_user_prs('An11key', 'python_au', 'open')
-    for item in prs:
-        verify_pr(item)
 
+if __name__ == '__main__':
+    date = '2020-12-29T17:03:54Z'
+    prs = get_all_user_prs('An11key', 'python_au', date)
+    for item in prs:
+        verify_pr(item,date)
