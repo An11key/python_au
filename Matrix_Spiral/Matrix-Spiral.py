@@ -1,4 +1,7 @@
 def main_start(N):
+    if N == 1:
+        print([1])
+        return None
     matrix = [[0 for i in range(N)] for j in range(N)]
     index = 1
     border = 0
