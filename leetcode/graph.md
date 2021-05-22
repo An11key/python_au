@@ -1,6 +1,7 @@
 # Graph
 
 + [Course schedule ii](#course-schedule-ii)
++ [Course schedule](#course-schedule)
 
 ## Course Schedule II
 
@@ -26,4 +27,33 @@ class Solution:
                 if indegree[i] == 0:
                     queue.append(i)
         return courses * (len(courses) == numCourses)
+```
+
+## Course Schedule
+
+https://leetcode.com/problems/course-schedule/
+
+```python
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        if not numCourses or not prerequisites: return True
+        graph = {}
+        for pair in prerequisites:
+            _from, _to = pair
+            graph.setdefault(_from, []).append(_to)
+        visiting, visited = set(), set()
+        def dfs(node):
+            if node in visiting: return False
+            visiting.add(node)
+            res = True
+            for child in graph.get(node, []):
+                if child not in visited:
+                    res &= dfs(child)
+                    if not res: return False
+            visiting.discard(node)
+            visited.add(node)
+            return res
+        for i in range(numCourses):
+            if not dfs(i): return False
+        return True
 ```
