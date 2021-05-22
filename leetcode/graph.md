@@ -7,6 +7,7 @@
 + [Cheapest flights within k stops](#cheapest-flights-within-k-stops)
 + [Shortest path in binary matrix](#shortest-path-in-binary-matrix)
 + [Maximum depth of n-ary tree](#maximum-depth-of-n-ary-tree)
++ [Min stack](#min-stack)
 
 ## Course Schedule II
 
@@ -184,4 +185,28 @@ class Solution:
         if not root: return 0
         if not root.children: return 1
         return max(self.maxDepth(i)+1 for i in root.children)
+```
+
+## Min Stack
+
+https://leetcode.com/problems/min-stack/
+
+```python
+class MinStack:
+    val=[] 
+
+    def __init__(self):
+        self.val.clear()
+    def push(self, x: int) -> None:
+        self.val.append(x)
+        
+
+    def pop(self) -> None:
+        self.val.pop()
+
+    def top(self) -> int:
+        return self.val[-1]
+
+    def getMin(self) -> int:
+        return min(self.val)
 ```
