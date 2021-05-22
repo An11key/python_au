@@ -8,6 +8,7 @@
 + [Shortest path in binary matrix](#shortest-path-in-binary-matrix)
 + [Maximum depth of n-ary tree](#maximum-depth-of-n-ary-tree)
 + [Min stack](#min-stack)
++ [Implement queue using stacks](#implement-queue-using-stacks)
 
 ## Course Schedule II
 
@@ -209,4 +210,39 @@ class MinStack:
 
     def getMin(self) -> int:
         return min(self.val)
+```
+
+## Implement Queue using Stacks
+
+https://leetcode.com/problems/implement-queue-using-stacks/
+
+```python
+class MyQueue:
+
+    def __init__(self):
+        self.arr=[]
+        
+
+    def push(self, x: int) -> None:
+        self.arr.append(x)
+        
+
+    def pop(self) -> int:
+        if len(self.arr)>0:
+            x=self.arr[0]
+            self.arr.remove(self.arr[0])
+            return x
+        
+        
+
+    def peek(self) -> int:
+        if len(self.arr)>0:
+            return self.arr[0]
+        
+        
+
+    def empty(self) -> bool:
+        if len(self.arr)>0:
+            return False
+        return True
 ```
