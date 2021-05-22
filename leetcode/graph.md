@@ -6,6 +6,7 @@
 + [Is graph bipartite?](#is-graph-bipartite?)
 + [Cheapest flights within k stops](#cheapest-flights-within-k-stops)
 + [Shortest path in binary matrix](#shortest-path-in-binary-matrix)
++ [Maximum depth of n-ary tree](#maximum-depth-of-n-ary-tree)
 
 ## Course Schedule II
 
@@ -171,4 +172,16 @@ class Solution:
                     q.append((a, b, d+1))
 
         return -1
+```
+
+## Maximum Depth of N-ary Tree
+
+https://leetcode.com/problems/maximum-depth-of-n-ary-tree/
+
+```python
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        if not root: return 0
+        if not root.children: return 1
+        return max(self.maxDepth(i)+1 for i in root.children)
 ```
