@@ -4,6 +4,7 @@
 + [Course schedule](#course-schedule)
 + [Number of islands](#number-of-islands)
 + [Is graph bipartite?](#is-graph-bipartite?)
++ [Cheapest flights within k stops](#cheapest-flights-within-k-stops)
 
 ## Course Schedule II
 
@@ -113,4 +114,36 @@ class Solution:
             if bi[val] is None:
                 ans = ans and dfs(graph, val, 0)
         return ans
+```
+
+## Cheapest Flights Within K Stops
+
+https://leetcode.com/problems/cheapest-flights-within-k-stops/
+
+```python
+class Solution:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        graph = collections.defaultdict(list)
+        for u,v,cost in flights:
+            graph[u].append([v,cost])
+        
+        visited = {src:0}
+        min_cost = sys.maxsize
+        queue = []
+        queue.append([src,0,k])
+        
+        while queue:
+            len1 = len(queue)    
+            for i in range(len1):
+                node,node_cost,k_val = queue.pop(0)
+                if node == dst and k_val >= -1:
+                    min_cost = min(min_cost,node_cost)
+                
+                for neigh,cost in graph[node]:
+                    if neigh not in visited or cost+node_cost<visited[neigh]:
+                        queue.append([neigh,cost+node_cost,k_val-1])
+                        visited[neigh] = cost+node_cost
+        if min_cost == sys.maxsize:
+            return -1
+        return min_cost
 ```
