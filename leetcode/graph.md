@@ -10,6 +10,7 @@
 + [Min stack](#min-stack)
 + [Implement queue using stacks](#implement-queue-using-stacks)
 + [Implement stack using queues](#implement-stack-using-queues)
++ [House robber ii](#house-robber-ii)
 
 ## Course Schedule II
 
@@ -276,4 +277,30 @@ class MyStack:
         if len(self.arr)>0:
             return False
         return True
+```
+
+## House Robber II
+
+https://leetcode.com/problems/house-robber-ii/
+
+```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        if len(nums) <= 3:
+            return max(nums)
+        
+        def helper(dp):
+            dp[1] = max(dp[0], dp[1])
+
+            for i in range(2, len(dp)):
+                dp[i] = max(dp[i - 1], dp[i] + dp[i - 2])
+
+            return dp[-1]
+        
+        p1 = helper(nums[:len(nums) - 1])
+        p2 = helper(nums[1:])
+        return max(p1, p2)
 ```
