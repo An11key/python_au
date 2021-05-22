@@ -9,6 +9,7 @@
 + [Maximum depth of n-ary tree](#maximum-depth-of-n-ary-tree)
 + [Min stack](#min-stack)
 + [Implement queue using stacks](#implement-queue-using-stacks)
++ [Implement stack using queues](#implement-stack-using-queues)
 
 ## Course Schedule II
 
@@ -239,6 +240,36 @@ class MyQueue:
         if len(self.arr)>0:
             return self.arr[0]
         
+        
+
+    def empty(self) -> bool:
+        if len(self.arr)>0:
+            return False
+        return True
+```
+
+## Implement Stack using Queues
+
+https://leetcode.com/problems/implement-stack-using-queues/
+
+```python
+class MyStack:
+
+    def __init__(self):
+        self.arr=[]
+        
+
+    def push(self, x: int) -> None:
+        self.arr.append(x)
+        
+
+    def pop(self) -> int:
+        if len(self.arr)>0:
+            return self.arr.pop()
+
+    def top(self) -> int:
+        if len(self.arr)>0:
+            return self.arr[-1]
         
 
     def empty(self) -> bool:
