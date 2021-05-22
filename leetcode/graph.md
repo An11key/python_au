@@ -2,6 +2,7 @@
 
 + [Course schedule ii](#course-schedule-ii)
 + [Course schedule](#course-schedule)
++ [Number of islands](#number-of-islands)
 
 ## Course Schedule II
 
@@ -56,4 +57,35 @@ class Solution:
         for i in range(numCourses):
             if not dfs(i): return False
         return True
+```
+
+## Number of Islands
+
+https://leetcode.com/problems/number-of-islands/
+
+```python
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        
+        def dfs(i,j):
+            
+            grid[i][j]="0"
+            
+            for nr,nc in (i+1,j),(i-1,j),(i,j+1),(i,j-1):
+                
+                if 0<=nr<m and 0<=nc<n and grid[nr][nc]=="1":
+                    dfs(nr,nc)
+        
+        count = 0
+        
+        for i in range(m):
+            for j in range(n):
+                
+                if grid[i][j]=="1":
+                    count+=1
+                    dfs(i,j)
+        
+        return count
 ```
