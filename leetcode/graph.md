@@ -5,6 +5,7 @@
 + [Number of islands](#number-of-islands)
 + [Is graph bipartite?](#is-graph-bipartite?)
 + [Cheapest flights within k stops](#cheapest-flights-within-k-stops)
++ [Shortest path in binary matrix](#shortest-path-in-binary-matrix)
 
 ## Course Schedule II
 
@@ -146,4 +147,28 @@ class Solution:
         if min_cost == sys.maxsize:
             return -1
         return min_cost
+```
+
+## Shortest Path in Binary Matrix
+
+https://leetcode.com/problems/shortest-path-in-binary-matrix/
+
+```python
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        rows = len(grid)
+        cols = len(grid[0])
+        if grid[0][0] == 1:
+            return -1
+        q = [(0, 0, 1)]
+        while len(q) > 0:
+            x, y, d = q.pop(0)
+            if x == rows-1 and y == cols-1:
+                return d
+            for a, b in ((x-1, y-1), (x+1, y+1), (x-1, y), (x+1, y), (x, y-1), (x, y+1), (x-1, y+1), (x+1, y-1)):
+                if 0 <= a < rows and 0 <= b < cols and grid[a][b] == 0:
+                    grid[a][b] = 1
+                    q.append((a, b, d+1))
+
+        return -1
 ```
