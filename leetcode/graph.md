@@ -3,6 +3,7 @@
 + [Course schedule ii](#course-schedule-ii)
 + [Course schedule](#course-schedule)
 + [Number of islands](#number-of-islands)
++ [Is graph bipartite?](#is-graph-bipartite?)
 
 ## Course Schedule II
 
@@ -88,4 +89,28 @@ class Solution:
                     dfs(i,j)
         
         return count
+```
+
+## Is Graph Bipartite?
+
+https://leetcode.com/problems/is-graph-bipartite/
+
+```python
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        def dfs(graph, val, side):
+            ans = True
+            bi[val] = side
+            new_side = 1 if not side else 0
+            for ind in graph[val]:
+                ans = ans and (dfs(graph, ind, new_side) if bi[ind] is None else False if bi[ind] != new_side else True)
+            return ans
+        
+        
+        bi = [None for val in range(len(graph))]
+        ans = True
+        for val in range(len(graph)):
+            if bi[val] is None:
+                ans = ans and dfs(graph, val, 0)
+        return ans
 ```
